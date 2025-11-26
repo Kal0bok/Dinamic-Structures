@@ -42,11 +42,11 @@ public class Uzd1 {
 				koPievienot =
 				JOptionPane.showInputDialog("Kādu produktu pievienot?");
 			}while((jauEksiste(saraksts, koPievienot) == true)||
-			!koPievienot.matches("[\\p{L}&&\\p{IsLatin}]+"));
+			!koPievienot.matches("^[\\p{L} ]+$"));
 			
 			saraksts.add(koPievienot.toLowerCase());
 			JOptionPane.showMessageDialog(null, "Produkts pievienots!", "Informācija",
-					JOptionPane.WARNING_MESSAGE);
+					JOptionPane.INFORMATION_MESSAGE);
 				break;
 			
 			case "2":
@@ -67,6 +67,18 @@ public class Uzd1 {
 				}
 				JOptionPane.showMessageDialog(null, str, "Produktu saraksts", JOptionPane.INFORMATION_MESSAGE);
 				}
+				break;
+				
+			case "4":
+				do {
+					koAtrast = JOptionPane.showInputDialog(null, 
+							"Kādu produktu meklēt sarakstā?", "Jautājums", JOptionPane.INFORMATION_MESSAGE);
+				}while(!koAtrast.matches("^[\\p{L} ]+$"));
+				
+				JOptionPane.showMessageDialog(null, ((saraksts.indexOf(koAtrast))>-1)?
+						"Produkts atrasts "+ saraksts.indexOf(koAtrast)+". pozīcija"
+						: "Produkts netika atrasts sarakstā!", 
+						"Informācija", JOptionPane.INFORMATION_MESSAGE);
 				break;
 			}
 		}while(!izvele.equals("0"));
