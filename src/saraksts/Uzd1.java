@@ -178,7 +178,39 @@ public class Uzd1 {
 					
 					break;
 				}
+break;
 				
+			case "6":
+				
+				do {
+					koNonemt =
+					JOptionPane.showInputDialog("Ko vajag noņemt?");
+					
+					if (koNonemt == null) 
+						break;
+					
+					if (!saraksts.contains(koNonemt.toLowerCase())) {
+						JOptionPane.showMessageDialog(null, "Šāda produkta nav saraksta!", 
+								"Kļuda", JOptionPane.WARNING_MESSAGE);
+					}
+				}while(!koNonemt.matches("[\\p{L}&&\\p{IsLatin}]+") || 
+						!saraksts.contains(koNonemt.toLowerCase()));
+				
+				if(koNonemt == null) 
+					break;
+				
+				if(saraksts.contains(koNonemt)) {
+					kurNonemt = saraksts.indexOf(koNonemt);
+					saraksts.remove(kurNonemt);
+					JOptionPane.showMessageDialog(null, "Jūsu produkts ir izdzēsts!", 
+							"Informācija", JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					JOptionPane.showMessageDialog(null, "Šada produkta nav!", "Informācija",
+					JOptionPane.WARNING_MESSAGE);
+				}
+				break;
+				
+			
 			}
 		}while(!izvele.equals("0"));
 	}
