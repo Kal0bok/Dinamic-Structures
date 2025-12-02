@@ -285,6 +285,50 @@ break;
 				
 				break;
 				
+			case "10":
+				
+				String jaunsProdukts;
+				
+				do {
+					koAtrast = JOptionPane.showInputDialog("Ko vajag mainīt?");
+					if (koAtrast == null) break;
+
+					if (!koAtrast.matches("[\\p{L}&&\\p{IsLatin}]+")) {
+						JOptionPane.showMessageDialog(null, "Nederīgs ievads!", "Kļūda",
+								JOptionPane.WARNING_MESSAGE);
+						continue;
+					}
+
+					if (!saraksts.contains(koAtrast.toLowerCase())) {
+						JOptionPane.showMessageDialog(null, "Šāda produkta nav sarakstā!", "Kļūda",
+								JOptionPane.WARNING_MESSAGE);
+					}
+
+				} while (!saraksts.contains(koAtrast.toLowerCase()));
+			
+			if(koAtrast  == null) 
+				break;
+			
+			jaunsProdukts = JOptionPane.showInputDialog("Ieraksti jaunu produktu:");
+			
+		    if (jaunsProdukts == null) 
+		    	break;
+		    
+		    if(saraksts.contains(jaunsProdukts.toLowerCase())) {
+		    	JOptionPane.showMessageDialog(null, "Šads produkts jau ir pievienots saraksta!",
+		    			"Informācija", JOptionPane.INFORMATION_MESSAGE);
+		    	break;
+		    }
+			
+			kuruMainit = saraksts.indexOf(koAtrast.toLowerCase());
+			arKoAizstat = jaunsProdukts.toLowerCase();
+			saraksts.set(kuruMainit, arKoAizstat);
+			
+			JOptionPane.showMessageDialog(null, "Produkts veiksmīgi nomainīts!",
+		            "Informācija", JOptionPane.INFORMATION_MESSAGE);
+			
+			break;
+				
 			
 			}
 		}while(!izvele.equals("0"));
