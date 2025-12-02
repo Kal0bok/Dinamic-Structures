@@ -329,6 +329,34 @@ break;
 			
 			break;
 				
+			case "11":
+				
+				if(saraksts.size() > 0) {
+					String atb = (String) JOptionPane.showInputDialog(null,
+							"Kārtot produktus alfabētiski augoši?", "Izvēle",
+							JOptionPane.INFORMATION_MESSAGE, null, 
+							atbilde, atbilde[0]);
+					if(atb != null) {
+						if(atb.equals("Jā")) {
+							 Collections.sort(saraksts);
+							JOptionPane.showMessageDialog(null, 
+									"Produkti sakārtoti augoši!", "Kārtošana",
+									JOptionPane.INFORMATION_MESSAGE);
+						}else {
+							Collections.sort(saraksts, Collections.reverseOrder());
+							JOptionPane.showMessageDialog(null, 
+									"Produkti sakārtoti dilstoši!", "Kārtošana",
+									JOptionPane.INFORMATION_MESSAGE);
+						}
+					}
+				}else {
+					JOptionPane.showMessageDialog(null, "Jūms nav produktu saraksta!",
+							"Kļūda", JOptionPane.ERROR_MESSAGE);
+					break;
+				}
+				
+				break;
+				
 			
 			}
 		}while(!izvele.equals("0"));
