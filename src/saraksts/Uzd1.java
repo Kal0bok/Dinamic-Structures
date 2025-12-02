@@ -237,6 +237,29 @@ break;
 				
 				break;
 				
+			case "8":
+				
+				int koNonemt1 =
+				JOptionPane.showConfirmDialog(null, "Tu tiešām grib izdzēst pirmo produktu?", "Izvele", JOptionPane.YES_NO_OPTION);
+				
+				if (koNonemt1 == JOptionPane.CANCEL_OPTION || koNonemt1 == JOptionPane.CLOSED_OPTION)
+				    break;
+				
+				if(koNonemt1 == JOptionPane.YES_OPTION) {
+					if(!saraksts.isEmpty()) {
+					saraksts.removeFirst();
+					JOptionPane.showMessageDialog(null, "Pirmais produkts ir noņemts!", 
+							"Informācija!", JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					JOptionPane.showMessageDialog(null, "Jūms nav produktu saraksta!", 
+							"Kļuda", JOptionPane.WARNING_MESSAGE);
+				}
+			}else {
+				JOptionPane.showMessageDialog(null, "Darbība atcelta!", "Informācija!", 
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+				break;
+				
 			
 			}
 		}while(!izvele.equals("0"));
