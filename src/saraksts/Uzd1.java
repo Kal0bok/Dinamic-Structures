@@ -260,6 +260,31 @@ break;
 			}
 				break;
 				
+			case "9":
+				
+				int koNonemt2 =
+				JOptionPane.showConfirmDialog(null, "Tu tiešām grib izdzēst pēdējo produktu?", 
+						"Izvele", JOptionPane.YES_NO_OPTION);
+				
+				if (koNonemt2 == JOptionPane.CANCEL_OPTION || koNonemt2 == JOptionPane.CLOSED_OPTION)
+				    break;
+				
+				if(koNonemt2 == JOptionPane.YES_OPTION) {
+					if(!saraksts.isEmpty()) {
+					saraksts.removeLast();
+					JOptionPane.showMessageDialog(null, "Pēdējais produkts ir noņemts!", 
+							"Informācija!", JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					JOptionPane.showMessageDialog(null, "Jūms nav produktu saraksta!", 
+							"Kļuda", JOptionPane.WARNING_MESSAGE);
+				}
+			}else {
+				JOptionPane.showMessageDialog(null, "Darbība atcelta!", "Informācija!", 
+						JOptionPane.INFORMATION_MESSAGE);
+			}
+				
+				break;
+				
 			
 			}
 		}while(!izvele.equals("0"));
