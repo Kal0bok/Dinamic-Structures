@@ -1,6 +1,6 @@
 package saraksts;
 
-import java.util.Iterator;
+import java.util.Collections;
 import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
@@ -16,9 +16,11 @@ public class Uzd1 {
 		}
 		return false;
 	}
+	
+	private static final String[] atbilde = {"Jā", "Nē"};
 
 	public static void main(String[] args) {
-		String izvele, koPievienot, koAtrast, koNonemt, arKoAizstat;
+		String izvele, koPievienot, koAtrast, koNonemt, arKoAizstat, izv = null, poz;
 		int kurPievienot, kurNonemt, kuruMainit;
 		LinkedList<String> saraksts = new LinkedList<>();
 		
@@ -26,10 +28,10 @@ public class Uzd1 {
 			do {
 			izvele = JOptionPane.showInputDialog("1 - Produktu\n2 - Produktu skaits\n"+
 			"3 - Izvadīt produktus\n4 - Atrast produktu\n"+ 
-			"5 - Pievienot Konkrētā pozīcija\n"+
+			"5 - Pievienot konkrētā pozīcija\n"+
 			"6 - Noņemt produktu\n7 - Noņemt pēc indeksa\n"+
 			"8 - Noņemt pirmo \n9 - Noņemt pēdējo\n"+
-			"10 - Mainīt produktu\n11 - Sakārtot alfabeētiski\n"+
+			"10 - Mainīt produktu\n11 - Sakārtot alfabētiski\n"+
 			"12 - Nodzēst sarakstu\n0 - Apturēt");	
 			
 			if(izvele == null) 
@@ -37,12 +39,19 @@ public class Uzd1 {
 			}while(!izvele.matches("\\d+"));
 			
 			switch(izvele) {
+			
+			case "0":
+				JOptionPane.showMessageDialog(null, "Programma apterēta!", 
+						"Informācija", JOptionPane.INFORMATION_MESSAGE);
+				break;
+			
 			case "1":			
 			do {
 				koPievienot =
 				JOptionPane.showInputDialog("Kādu produktu pievienot?");
+				
 			}while((jauEksiste(saraksts, koPievienot) == true)||
-			!koPievienot.matches("^[\\p{L} ]+$"));
+			!koPievienot.matches("[\\p{L}&&\\p{IsLatin}]+"));
 			
 			saraksts.add(koPievienot.toLowerCase());
 			JOptionPane.showMessageDialog(null, "Produkts pievienots!", "Informācija",
@@ -50,8 +59,8 @@ public class Uzd1 {
 				break;
 			
 			case "2":
-				JOptionPane.showMessageDialog(null, "Produktu sakaits: "+
-						saraksts.size(), "Informācija", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Produktu skaits: "+
+			saraksts.size(), "Informācija", JOptionPane.INFORMATION_MESSAGE);
 				break;
 				
 			case "3":
@@ -60,29 +69,117 @@ public class Uzd1 {
 							"Informācija", JOptionPane.INFORMATION_MESSAGE);
 				
 				else {
-					Iterator<String> izvade = saraksts.iterator();
-					String str = "";
-					while(izvade.hasNext()) {
-					str += izvade.next()+"\n";
+					StringBuilder str = new StringBuilder();
+				    for (int i = 0; i < saraksts.size(); i++) {
+				        str.append(saraksts.get(i))
+				           .append(" (")
+				           .append(i)
+				           .append(")\n");
 				}
-				JOptionPane.showMessageDialog(null, str, "Produktu saraksts", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, str, "Produktu saraksts", 
+						JOptionPane.INFORMATION_MESSAGE);
 				}
 				break;
 				
 			case "4":
 				do {
-					koAtrast = JOptionPane.showInputDialog(null, 
-							"Kādu produktu meklēt sarakstā?", "Jautājums", JOptionPane.INFORMATION_MESSAGE);
-				}while(!koAtrast.matches("^[\\p{L} ]+$"));
+					koAtrast =
+					JOptionPane.showInputDialog("Ko vajag atrast?");
+				}while(!koAtrast.matches("[\\p{L}&&\\p{IsLatin}]+"));
 				
-				JOptionPane.showMessageDialog(null, ((saraksts.indexOf(koAtrast))>-1)?
-						"Produkts atrasts "+ saraksts.indexOf(koAtrast)+". pozīcija"
-						: "Produkts netika atrasts sarakstā!", 
-						"Informācija", JOptionPane.INFORMATION_MESSAGE);
+				if(saraksts.contains(koAtrast)) {
+					kurPievienot = saraksts.indexOf(koAtrast);
+					JOptionPane.showMessageDialog(null, "Jūsu produkta indeks: " + kurPievienot, 
+							"Informācija", JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					JOptionPane.showMessageDialog(null, "Šada produkta nav!", "Informācija",
+					JOptionPane.WARNING_MESSAGE);
+				}
 				break;
+				
+			case "5":
+				do {
+					izv = JOptionPane.showInputDialog("1 - Pievienot produktu ar indeksu"
+							+ "\n2 - Samainit indeksu esošam produktam\n");
+					
+				if(izv == null) 
+					izv = "0";
+				}while(!izv.matches("\\d+"));
+				
+				switch(izv) {
+				case "1":
+					
+					do {
+						koPievienot =
+						JOptionPane.showInputDialog("Kādu produktu pievienot?");
+						
+						if (koPievienot == null) 
+							break;
+						
+						if (saraksts.contains(koPievienot.toLowerCase())) {
+							JOptionPane.showMessageDialog(null, "Šāds produkts jau ir saraksta!", 
+									"Kļuda", JOptionPane.WARNING_MESSAGE);
+						}						
+					}while(!koPievienot.matches("[\\p{L}&&\\p{IsLatin}]+") || 
+							saraksts.contains(koPievienot.toLowerCase()));
+					
+					if(koPievienot == null) 
+						break;
+					
+					poz=
+					JOptionPane.showInputDialog("Kāda pozīcija?");
+					
+					if (poz == null)
+						break;
+					
+					kurPievienot = Integer.parseInt(poz);
+					saraksts.add(kurPievienot, koPievienot.toLowerCase());
+					JOptionPane.showMessageDialog(null, "Produkts pievienots!", "Informācija",
+							JOptionPane.INFORMATION_MESSAGE);
+						break;
+					
+				case "2":
+					
+					do {
+						koAtrast =
+						JOptionPane.showInputDialog("Kādam produktam izmainīt indeksu?");
+						
+						
+						if (koAtrast == null) 
+							break;
+						
+						if (!saraksts.contains(koAtrast.toLowerCase())) {
+							JOptionPane.showMessageDialog(null, "Šāda produkta nav saraksta!", 
+									"Kļuda", JOptionPane.WARNING_MESSAGE);
+						}						
+					}while(!koAtrast.matches("[\\p{L}&&\\p{IsLatin}]+") || 
+							!saraksts.contains(koAtrast.toLowerCase()));
+					
+					if(koAtrast == null) 
+						break;
+					
+					poz=
+					JOptionPane.showInputDialog("Kāda pozīcija?");
+					
+					if (poz == null)
+						break;
+					
+					kurPievienot = Integer.parseInt(poz);
+					kurNonemt = saraksts.indexOf(koAtrast);
+					
+					String prod = saraksts.remove(kurNonemt);
+					
+					if(kurPievienot > kurNonemt) 
+						kurPievienot--;
+					saraksts.add(kurPievienot, prod);
+					
+					JOptionPane.showMessageDialog(null, "Produkts pārvietots!", "Informācija",
+							JOptionPane.INFORMATION_MESSAGE);
+					
+					break;
+				}
+				
 			}
 		}while(!izvele.equals("0"));
-		
-		
-		}
+	}
 }
