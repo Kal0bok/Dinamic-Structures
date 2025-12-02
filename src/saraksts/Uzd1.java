@@ -178,7 +178,7 @@ public class Uzd1 {
 					
 					break;
 				}
-break;
+				break;
 				
 			case "6":
 				
@@ -377,6 +377,10 @@ break;
 			}
 				
 				break;
+				
+				default:
+					JOptionPane.showMessageDialog(null, "Šāda darbība nepastāv!",
+							"Brīdinjums", JOptionPane.WARNING_MESSAGE);
 			}
 		}while(!izvele.equals("0"));
 	}
