@@ -210,6 +210,33 @@ break;
 				}
 				break;
 				
+			case "7":
+				
+				kurNonemt = -1;
+				do {
+					poz =
+					JOptionPane.showInputDialog("Ko vajag noņemt? (indeks)");
+					
+					if (poz == null) 
+						break;
+					
+					kurNonemt = Integer.parseInt(poz);
+					
+					if (kurNonemt < 0 || kurNonemt >= saraksts.size()) {
+						JOptionPane.showMessageDialog(null, "Šāda produkta nav saraksta!", 
+								"Kļuda", JOptionPane.WARNING_MESSAGE);
+					}
+				}while(!poz.matches("\\d+"));
+				
+				if(poz == null) 
+					break;
+				
+				String removed = saraksts.remove(kurNonemt);
+				JOptionPane.showMessageDialog(null, "Produkts \"" + removed + "\" ir noņemts!", 
+                        "Informācija", JOptionPane.INFORMATION_MESSAGE);
+				
+				break;
+				
 			
 			}
 		}while(!izvele.equals("0"));
