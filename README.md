@@ -99,7 +99,7 @@ Izdzēst visus produktus no saraksta.
 
 ## 📝 License
 
-MIT License
+ ©License
 
 ---
 
