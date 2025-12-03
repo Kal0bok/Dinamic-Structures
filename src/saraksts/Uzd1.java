@@ -50,8 +50,14 @@ public class Uzd1 {
 				koPievienot =
 				JOptionPane.showInputDialog("Kādu produktu pievienot?");
 				
+				if(koPievienot == null)
+					break;
+				
 			}while((jauEksiste(saraksts, koPievienot) == true)||
 			!koPievienot.matches("[\\p{L}&&\\p{IsLatin}]+"));
+			
+			if(koPievienot == null) 
+				break;
 			
 			saraksts.add(koPievienot.toLowerCase());
 			JOptionPane.showMessageDialog(null, "Produkts pievienots!", "Informācija",
@@ -85,15 +91,22 @@ public class Uzd1 {
 				do {
 					koAtrast =
 					JOptionPane.showInputDialog("Ko vajag atrast?");
+					
+					if(koAtrast == null)
+						break;
+					
+					else {
+						JOptionPane.showMessageDialog(null, "Šada produkta nav!", "Informācija",
+						JOptionPane.WARNING_MESSAGE);
+					}
+					
 				}while(!koAtrast.matches("[\\p{L}&&\\p{IsLatin}]+"));
+				
 				
 				if(saraksts.contains(koAtrast)) {
 					kurPievienot = saraksts.indexOf(koAtrast);
 					JOptionPane.showMessageDialog(null, "Jūsu produkta indeks: " + kurPievienot, 
 							"Informācija", JOptionPane.INFORMATION_MESSAGE);
-				}else {
-					JOptionPane.showMessageDialog(null, "Šada produkta nav!", "Informācija",
-					JOptionPane.WARNING_MESSAGE);
 				}
 				break;
 				
@@ -204,9 +217,6 @@ public class Uzd1 {
 					saraksts.remove(kurNonemt);
 					JOptionPane.showMessageDialog(null, "Jūsu produkts ir izdzēsts!", 
 							"Informācija", JOptionPane.INFORMATION_MESSAGE);
-				}else {
-					JOptionPane.showMessageDialog(null, "Šada produkta nav!", "Informācija",
-					JOptionPane.WARNING_MESSAGE);
 				}
 				break;
 				
